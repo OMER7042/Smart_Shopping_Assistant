@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping List</title>
+</head>
+<body>
+    <h1>Welcome to your Shopping List</h1>
+    <h2>Add Product:</h2>
+    <a href="/product/add">Add Product</a>
+    <h2>Product List:</h2>
+    <ul>
+        {% for product in products %}
+        <li>{{product.id}}. {{ product.product_name }} - {{ product.brand_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
