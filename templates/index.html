@@ -10,7 +10,7 @@
     <h2>Product List:</h2>
     <ul>
         {% for product in products %}
-        <li>{{product.id}}. {{ product.product_name }} - {{ product.brand_name }}</li>
+        <li>{{product.id}}. {{ product.product_name }} - {{ product.brand_name }} - {{ product.price}} @ {{ product.vendor}}</li>
         {% endfor %}
     </ul>
 </body>
