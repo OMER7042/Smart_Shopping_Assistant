@@ -20,6 +20,17 @@ class Product(db.Model):
     vendor = db.Column(db.String(100), nullable=False,default = "No Vendor Data")
     price = db.Column(db.Float, default=0.0)
     in_list = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Product {self.name}>'
+
+class Vendor(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Vendor {self.name}>'
     
 
 with app.app_context():
@@ -116,7 +127,54 @@ def remove_from_list(product_id):
         db.session.rollback()
         return jsonify({'error': 'Failed to remove product with ID {} from the shopping list: {}'.format(product_id, str(e))}), 500
 
+@app.route('/vendors/add', methods=['POST'])
+def create_vendor():
+    try:
+        data = request.json
+        name = data.get('name')
+        is_active = data.get('is_active', True)
 
+        vendor = Vendor(name=name, is_active=is_active)
+        db.session.add(vendor)
+        db.session.commit()
+
+        return jsonify({'message': 'Vendor created successfully', 'vendor_id': vendor.id}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Failed to create vendor: {}'.format(str(e))}), 500
+    
+@app.route('/vendors/view', methods=['GET'])
+def get_all_vendors():
+    try:
+        vendors = Vendor.query.all()
+        vendors_list = [{'id': vendor.id, 'name': vendor.name, 'is_active': vendor.is_active} for vendor in vendors]
+        return jsonify({'vendors': vendors_list})
+    except Exception as e:
+        return jsonify({'error': 'Failed to fetch vendors: {}'.format(str(e))}), 500
+
+@app.route('/vendors/update/<int:vendor_id>', methods=['PUT'])
+def update_vendor(vendor_id):
+    try:
+        vendor = Vendor.query.get_or_404(vendor_id)
+        data = request.json
+        vendor.name = data.get('name', vendor.name)
+        vendor.is_active = data.get('is_active', vendor.is_active)
+        db.session.commit()
+        return jsonify({'message': 'Vendor updated successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Failed to update vendor: {}'.format(str(e))}), 500
+
+@app.route('/vendors/delete/<int:vendor_id>', methods=['DELETE'])
+def delete_vendor(vendor_id):
+    try:
+        vendor = Vendor.query.get_or_404(vendor_id)
+        db.session.delete(vendor)
+        db.session.commit()
+        return jsonify({'message': 'Vendor deleted successfully'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Failed to delete vendor: {}'.format(str(e))}), 500
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
