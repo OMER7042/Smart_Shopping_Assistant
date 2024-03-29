@@ -70,7 +70,7 @@ def product_delete(id):
 
     return render_template("user/delete.html", product=product)
 
-@app.route('/products/shopping_list/<int:product_id>', methods=['POST'])
+@app.route('/shopping_list/add/<int:product_id>', methods=['POST'])
 def update_in_list(product_id):
     try:
         # Update in_list parameter for all products with the received product_id
@@ -85,7 +85,7 @@ def update_in_list(product_id):
         db.session.rollback()
         return jsonify({'error': 'Failed to update in_list parameter for products with ID {}: {}'.format(product_id, str(e))}), 500
 
-@app.route('/products/in_list', methods=['GET'])
+@app.route('/shopping_list/view', methods=['GET'])
 def get_products_in_list():
     try:
         # Query products where in_list is true
@@ -100,5 +100,23 @@ def get_products_in_list():
         return jsonify({'products': products_list})
     except Exception as e:
         return jsonify({'error': 'Failed to fetch products with in_list=True: {}'.format(str(e))}), 500
+    
+@app.route('/shopping_list/delete/<int:product_id>', methods=['POST'])
+def remove_from_list(product_id):
+    try:
+        # Update in_list parameter to false for the specified product_id
+        db.session.execute(
+            Product.__table__.update()
+            .where(Product.id == product_id)
+            .values(in_list=False)
+        )
+        db.session.commit()
+        return jsonify({'message': 'Product with ID {} removed from the shopping list'.format(product_id)})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Failed to remove product with ID {} from the shopping list: {}'.format(product_id, str(e))}), 500
+
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
