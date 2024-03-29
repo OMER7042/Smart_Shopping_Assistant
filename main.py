@@ -69,5 +69,36 @@ def product_delete(id):
         return redirect(url_for("product_list"))
 
     return render_template("user/delete.html", product=product)
+
+@app.route('/products/shopping_list/<int:product_id>', methods=['POST'])
+def update_in_list(product_id):
+    try:
+        # Update in_list parameter for all products with the received product_id
+        db.session.execute(
+            Product.__table__.update()
+            .where(Product.id == product_id)
+            .values(in_list=True)
+        )
+        db.session.commit()
+        return jsonify({'message': 'In_list parameter updated successfully for products with ID {}'.format(product_id)})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Failed to update in_list parameter for products with ID {}: {}'.format(product_id, str(e))}), 500
+
+@app.route('/products/in_list', methods=['GET'])
+def get_products_in_list():
+    try:
+        # Query products where in_list is true
+        products = db.session.query(Product).filter(Product.in_list == True).all()
+
+        # Convert products to a list of dictionaries
+        products_list = [
+            {'id': product.id, 'product_name': product.product_name, 'brand_name': product.brand_name, 'price': product.price, 'vendor': product.vendor}
+            for product in products
+        ]
+
+        return jsonify({'products': products_list})
+    except Exception as e:
+        return jsonify({'error': 'Failed to fetch products with in_list=True: {}'.format(str(e))}), 500
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
