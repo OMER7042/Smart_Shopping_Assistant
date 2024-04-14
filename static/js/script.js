@@ -10,6 +10,45 @@ document.addEventListener("DOMContentLoaded", function () {
     addSelectedProducts();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Other functions and event listeners
+    
+    document.getElementById('fetch-shopping-list').addEventListener('click', function () {
+        fetchShoppingList();
+    });
+});
+
+function fetchShoppingList() {
+    fetch('/shopping_list/view')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayShoppingList(data);
+        })
+        .catch(error => {
+            console.error('Error fetching shopping list:', error);
+        });
+}
+
+function displayShoppingList(shoppingList) {
+    const shoppingListContainer = document.getElementById('shopping-list');
+    shoppingListContainer.innerHTML = ''; // Clear previous content
+    
+    shoppingList.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.product_name} - ${item.brand_name} - ${item.vendor} - $${item.price}`;
+        shoppingListContainer.appendChild(listItem);
+    });
+
+    // Show the modal dialog with the shopping list
+    $('#modal-shopping-list').modal('show');
+}
+
+
 function addShoppingPanel() {
     document.getElementById('add-shop').addEventListener('click', function () {
         var productListing = document.getElementById("productListing");

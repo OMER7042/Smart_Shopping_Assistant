@@ -18,6 +18,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <button type="button" class="btn btn-outline-info button" id="fetch-shopping-list">Fetch Shopping List</button>
+
+    <!-- Modal for displaying the shopping list -->
+    <div class="modal" tabindex="-1" id="modal-shopping-list">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping List</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="shopping-list"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="body">
         <header class="card header">
             <nav class="navbar bg-body-light">
