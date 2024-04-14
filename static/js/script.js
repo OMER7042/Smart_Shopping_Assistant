@@ -10,21 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addSelectedProducts();
 });
 
-// function addShoppingPanel() {
-//     document.getElementById('add-shop').addEventListener('click', function () {
-//         var productListing = document.getElementById("productListing");
-//         productListing.innerHTML = "";
-    
-//         for (i = 0; i < products.length; i++) {
-//             var li = document.createElement("LI");
-//             var textnode=document.createTextNode(products[i].productname + "/" + products[i].brandname + " from " + products[i].vendor + " - " + products[i].price);
-//             li.appendChild(textnode);
-//             productListing.appendChild(li);
-//         }    
-//         $('#modal-pr').modal('show');
-//     });
-// }
-
 function addShoppingPanel() {
     document.getElementById('add-shop').addEventListener('click', function () {
         var productListing = document.getElementById("productListing");
@@ -46,6 +31,8 @@ function addShoppingPanel() {
         $('#modal-pr').modal('show');
     });
 }
+
+// Until here I made some change to code.rest below code is the same.
 
 
 function addVendorPanel() {
