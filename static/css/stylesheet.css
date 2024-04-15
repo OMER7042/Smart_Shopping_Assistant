@@ -1,0 +1,120 @@
+
+.header {
+    width:100%;
+    padding:10;
+    background-color: white;/* Umair */
+    border: none;
+}
+.title {
+    color:whitesmoke
+}
+
+.dsc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:1em;
+}
+.scc {
+     margin-top:10;
+     display: flex;
+     justify-content: space-evenly;
+
+}
+.dsc-ca {
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+.button {
+    width: 50%;
+}
+.hr-line {
+    border: 1px solid black !important;
+    width: 100%;
+    margin-top: 2px !important;
+}
+#selectedProductsSection .card {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid blue;
+    width: 200px;;
+    transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+#productListing {
+    list-style: none; /* Remove default list style */
+    padding:0;
+}
+#selectedProductsContainer {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Align cards horizontally in the center */
+    align-items: center; /* Align cards vertically in the center */
+}
+#selectedProductsSection .card:hover {
+    box-shadow: 0 0 16px rgb(0, 213, 255); /* Add a box-shadow effect on hover */
+}
+
+.btn-outline-success:hover{
+    color: #fff;
+    background-color: #00fdff;
+    border-color: #00fdff;
+}
+
+/* Umair */
+body{
+    background-image: flex;
+    background-image: url("../images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;   
+}
+
+#first:hover { 
+    border: 5px solid rgb(255, 162, 0);
+    background-color: rgba(255, 255, 255, 0.5); 
+}
+
+#second:hover {
+    border: 5px solid rgb(0, 162, 255);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#third:hover {
+    border: 5px solid rgb(7, 255, 230);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+ 
+#selectedProductsSection{
+    /* background-image: url("bg.jpg"); */
+    background-color: rgba(255, 255, 255, 0.5);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+  /* Umair */
+
+/* Adjust card-columns for responsiveness */
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 992px) {
+    .card-columns {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
