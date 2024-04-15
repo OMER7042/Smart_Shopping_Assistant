@@ -11,11 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Other functions and event listeners
-    
-    document.getElementById('fetch-shopping-list').addEventListener('click', function () {
-        fetchShoppingList();
-    });
+    fetchShoppingList(); // Fetch shopping list when the page loads
+    addShoppingPanel();
+    fetchVendors(); // Fetch vendors when the page loads
 });
 
 function fetchShoppingList() {
@@ -35,41 +33,54 @@ function fetchShoppingList() {
 }
 
 function displayShoppingList(shoppingList) {
-    const shoppingListContainer = document.getElementById('shopping-list');
-    shoppingListContainer.innerHTML = ''; // Clear previous content
+    const allProductsList = document.getElementById('all-products-list');
+    allProductsList.innerHTML = ''; // Clear previous content
     
     shoppingList.forEach(item => {
         const listItem = document.createElement('li');
         listItem.textContent = `${item.product_name} - ${item.brand_name} - ${item.vendor} - $${item.price}`;
-        shoppingListContainer.appendChild(listItem);
+        allProductsList.appendChild(listItem);
     });
-
-    // Show the modal dialog with the shopping list
-    $('#modal-shopping-list').modal('show');
 }
-
 
 function addShoppingPanel() {
-    document.getElementById('add-shop').addEventListener('click', function () {
-        var productListing = document.getElementById("productListing");
-        productListing.innerHTML = "";
-    
-        for (i = 0; i < products.length; i++) {
-            var li = document.createElement("li");
-            var checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.name = "selectedProducts";
-            checkbox.value = i; // Set the value to the index of the product in the array
-            var label = document.createElement("label");
-            label.textContent = " " + products[i].productname + "/" + products[i].brandname + " from " + products[i].vendor + " -$" + products[i].price;
-            
-            li.appendChild(checkbox);
-            li.appendChild(label);
-            productListing.appendChild(li);
-        }    
-        $('#modal-pr').modal('show');
-    });
+    var addButton = document.getElementById('add-shop');
+    if (addButton) {
+        addButton.addEventListener('click', function () {
+            fetchProducts(); // Call the function to fetch products when the button is clicked
+        });
+    }
 }
+
+function fetchVendors() {
+    fetch('/vendors/view')
+        .then(response => response.json())
+        .then(data => {
+            if (data.vendors) {
+                displayVendors(data.vendors); // Call a function to display vendors if the response contains the expected data
+            } else {
+                console.error('Error fetching vendors: Response format is invalid');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching vendors:', error);
+        });
+}
+
+function displayVendors(vendors) {
+    var vendorList = document.getElementById("vendorList");
+    if (vendorList) {
+        vendorList.innerHTML = ""; // Clear previous content
+        vendors.forEach(vendor => {
+            var listItem = document.createElement("li");
+            listItem.textContent = vendor.name;
+            vendorList.appendChild(listItem);
+        });
+    }
+}
+
+
+//Old code
 
 // Until here I made some change to code.rest below code is the same.
 

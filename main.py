@@ -148,7 +148,8 @@ def get_all_vendors():
     try:
         vendors = Vendor.query.all()
         vendors_list = [{'id': vendor.id, 'name': vendor.name, 'is_active': vendor.is_active} for vendor in vendors]
-        return jsonify({'vendors': vendors_list})
+        print({'vendors': vendors_list})
+        return {'vendors': vendors_list}
     except Exception as e:
         return jsonify({'error': 'Failed to fetch vendors: {}'.format(str(e))}), 500
 

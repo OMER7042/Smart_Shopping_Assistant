@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <button type="button" class="btn btn-outline-info button" id="fetch-shopping-list">Fetch Shopping List</button>
+    
 
     <!-- Modal for displaying the shopping list -->
     <div class="modal" tabindex="-1" id="modal-shopping-list">
@@ -52,12 +52,11 @@
         <br>
         <section class="scc row">
             <div class="dsc-container">
-            <div class="card col-3 dsc-ca" id="first">
-                <h2 class="text-center">All Products</h2>
-                <hr class="hr-line">
-                <button type="button" class="btn btn-outline-warning button" id="add-shop"> Add
-                    +</button>
-            </div>
+<div class="card col-3 dsc-ca" id="first">
+    <h2 class="text-center">All Products</h2>
+    <hr class="hr-line">
+    <ul id="all-products-list"></ul>
+</div>
             <div class="col-1"></div>
             <div class="card col-3 dsc-ca" id="second">
                 <h2 class="text-center"> New Vendor </h2>
