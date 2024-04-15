@@ -100,15 +100,15 @@ def update_in_list(product_id):
 def get_products_in_list():
     try:
         # Query products where in_list is true
-        products = db.session.query(Product).filter(Product.in_list == True).all()
+        prod = db.session.query(Product).filter(Product.in_list == True).all()
 
         # Convert products to a list of dictionaries
-        products_list = [
+        products = [
             {'id': product.id, 'product_name': product.product_name, 'brand_name': product.brand_name, 'price': product.price, 'vendor': product.vendor}
-            for product in products
+            for product in prod
         ]
 
-        return jsonify({'products': products_list})
+        return jsonify(products)
     except Exception as e:
         return jsonify({'error': 'Failed to fetch products with in_list=True: {}'.format(str(e))}), 500
     
@@ -148,7 +148,8 @@ def get_all_vendors():
     try:
         vendors = Vendor.query.all()
         vendors_list = [{'id': vendor.id, 'name': vendor.name, 'is_active': vendor.is_active} for vendor in vendors]
-        return jsonify({'vendors': vendors_list})
+        print({'vendors': vendors_list})
+        return {'vendors': vendors_list}
     except Exception as e:
         return jsonify({'error': 'Failed to fetch vendors: {}'.format(str(e))}), 500
 

@@ -66,9 +66,9 @@
 /* Umair */
 body{
     background-image: flex;
-    background-image: url("bg.jpg");
+    background-image: url("../images/bg.jpg");
     background-repeat: no-repeat;
-    background-size: cover;    
+    background-size: cover;   
 }
 
 #first:hover { 
