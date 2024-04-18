@@ -6,7 +6,7 @@ Environment setup
 Navigate to project root dir SHOPPINGLIST_FLASK
 run command
    python -m venv appenv 
-   add appenv folder to git ignore 
+add appenv folder to git ignore 
    appenv\Scripts\activate
    pip install -r requirements.txt
 
@@ -25,3 +25,6 @@ if changes are made to the structure of the db, migrations need to be made.
         flask db migrate -m "Initial migration."
         flask db upgrade
     
+
+Note
+Use git rm -r --cached __pycache__/ to remove pycachefrom git
