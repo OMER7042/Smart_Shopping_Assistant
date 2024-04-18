@@ -20,6 +20,7 @@ class Product(db.Model):
     vendor = db.Column(db.String(100), nullable=False,default = "No Vendor Data")
     price = db.Column(db.Float, default=0.0)
     in_list = db.Column(db.Boolean, default=False)
+    test = db.Column(db.Boolean, default = False)
 
     def __repr__(self):
         return f'<Product {self.name}>'
