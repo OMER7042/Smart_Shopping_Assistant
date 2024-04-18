@@ -1,13 +1,17 @@
 Python requirements
 Python 3.11
+pip
 module: python virtualenv
 
 Environment setup
 Navigate to project root dir SHOPPINGLIST_FLASK
-run command
+run command to create virtual environment
    python -m venv appenv 
 add appenv folder to git ignore 
-   appenv\Scripts\activate
+Activate Environment
+   Windows :appenv\Scripts\activate
+   MAC : source appenv/bin/activate
+Install Dependencies
    pip install -r requirements.txt
 
 To run the server as is, on specified port in main.py
