@@ -1,7 +1,6 @@
 migrations
 appenv
-/instance
-/__pycache__
-__pycache__/config.cpython-311.pyc
+instance
+__pycache__
 *.pyc
 *.pyo
