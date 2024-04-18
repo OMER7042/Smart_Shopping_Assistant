@@ -38,7 +38,7 @@ function displayShoppingList(shoppingList) {
     
     shoppingList.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.product_name} - ${item.brand_name} - ${item.vendor} - $${item.price}`;
+        listItem.textContent = `${item.product_name} - ${item.brand_name} - ${item.vendor_name} - $${item.price}`;
         allProductsList.appendChild(listItem);
     });
 }
