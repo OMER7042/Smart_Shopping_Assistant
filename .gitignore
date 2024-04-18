@@ -1,6 +1,6 @@
 migrations
 appenv
-instance
+/instance
 __pycache__
 *.pyc
 *.pyo
