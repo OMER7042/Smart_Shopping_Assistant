@@ -1,0 +1,30 @@
+Python requirements
+Python 3.11
+module: python virtualenv
+
+Environment setup
+Navigate to project root dir SHOPPINGLIST_FLASK
+run command
+   python -m venv appenv 
+add appenv folder to git ignore 
+   appenv\Scripts\activate
+   pip install -r requirements.txt
+
+To run the server as is, on specified port in main.py
+run command
+    python main.py
+
+DB setup
+Flask automatically sets up the database once the main.py file is run
+if changes are made to the structure of the db, migrations need to be made.
+    First you need to specify the default flask application server file name by :
+        set FLASK_APP=main.py
+    Run command to make a migrations folder
+        flask db init
+    Command to commit migration
+        flask db migrate -m "Initial migration."
+        flask db upgrade
+    
+
+Note
+Use git rm -r --cached __pycache__/ to remove pycachefrom git
